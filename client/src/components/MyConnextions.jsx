@@ -1,8 +1,21 @@
 "use client"
+import React, { useState } from 'react'
+import AuthService from '../services/authServices'
+import { useRouter } from 'next/navigation'
+
+
+
 
 export default function MyConnections() {
+    const router = useRouter();
+    const [show, setShow] = useState(AuthService.isAuthenticated())
+    if (show === false) {
+        router.push('/')
+    }
+
+
     return (
-        <main className='w-full min-h-screen bg-[#f8fafe]'>
+        show&&<main className='w-full min-h-screen bg-[#f8fafe]'>
 
             {/* CARD HEAD COVER */}
             <div className='h-[71px]  mx-4 w-auto bg-[#1E2875] rounded-[2.78px]  md:rounded-lg md:p-4 p-3'>

@@ -1,4 +1,5 @@
-import './globals.css'
+import Navbar from '@/components/Navbar'
+import SideMenu from '@/components/SideMenu'
 import { Outfit } from 'next/font/google'
 
 const OutfitFont = Outfit({
@@ -12,10 +13,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={OutfitFont.className}>
+    <>
+      <Navbar />
+      <div className='flex'>
+        <SideMenu />
         {children}
-      </body>
-    </html>
+      </div>
+    </>
   )
 }
