@@ -2,29 +2,54 @@
 import React, { useState } from 'react'
 import AuthService from '../services/authServices'
 import { useRouter } from 'next/navigation'
+import Modal from './Modal';
 
 
 export default function MyProfile() {
 
   const router = useRouter();
   const [show, setShow] = useState(AuthService.isAuthenticated())
-  if (show===false) {
+  if (show === false) {
     router.push('/')
   }
+
+  const dummyData = {
+    name: "Vishnu Swaroop",
+    email: "vishnu@oruphones.com",
+    phone: "+91 49652845732",
+    about: "Lorem ipsum dolor sit amet consectetur Erat auctor a aliquam vel congue luctus. Leo diam cras neque mauris ac arcu elit ipsum dolor sit amet consectetur",
+    skills: ["Next Js", "Typescript"],
+    professionalDetails: "This are the professional details shown to users in the app.",
+    certifications: [{ name: "Python", institute: "Coding Ninjas" }],
+    expeiences: [{
+      fromYearToYear: "7 Years (2014-2021) Full-time",
+      organizationWithRole: "Oruphones -- Full Stack Developer"
+    },
+    {
+      fromYearToYear: "7 Years (2014-2021) Full-time",
+      organizationWithRole: "Oruphones -- Full Stack Developer"
+    }],
+    higherEducation: {
+      institute: "IIT HYDERABAD",
+      fromYearToYear: "(2010-2914)",
+      course: "Btech",
+      aboutEducation: "Lorem ipsum dolor sit amet consectetur. Erat auctor a aliquam vel congue luctus. Leo diam cras neque mauris ac arcu elit ipsum dolor sit amet consectetur."
+    }
+  }
+  const [myProfileData, setMyProfileData] = useState(dummyData)
 
 
   return (
     show &&
     <main className='w-full h-auto bg-[#f8fafe]'>
-
       {/* CARD HEAD COVER */}
       <div className='h-[71px] md:h-[169px] mx-4 w-auto bg-[#1E2875] rounded-[2.78px]  md:rounded-lg md:p-4 p-3'>
         <p className='text-white text-xs md:text-sm font-medium  '>My Profile</p>
       </div>
 
+      {/* <Modal /> */}
 
       <div className='grid md:grid-cols-2 gap-5  m-[40px]  rounded-[7.125px] bg-[#FFF] border border-[#EBEBEE]   -mt-[30px] md:-mt-20 p-5 md:m-16 shadow-lg mb-10'>
-
         {/* COL 1ST */}
         <div className=''>
           <div className='flex '>
@@ -42,25 +67,25 @@ export default function MyProfile() {
             <div className='rounded-[4.444px] border-2 p-[14px] text-sm shadow-sm flex flex-col gap-5 '>
               <div className='flex flex-col gap-2'>
                 <p className='text-[#1f1f1f]'>Your Name</p>
-                <p className='font-medium '>Vishnu Swaroop</p>
+                <p className='font-medium '>{myProfileData.name}</p>
               </div>
               <div className='flex flex-col gap-2'>
                 <p className='text-[#1f1f1f]'>Email</p>
-                <p className='font-medium '>vishnu@oruphones.com</p>
+                <p className='font-medium '>{myProfileData.email}</p>
               </div>
               <div className='flex flex-col gap-2'>
                 <p className='text-[#1f1f1f]'>Phone Number</p>
-                <p className='font-medium '>+91 49652845732</p>
+                <p className='font-medium '>{myProfileData.phone}</p>
               </div>
             </div>
 
             {/* Card 2 Most Inner */}
             <div className='rounded-[4.444px] border-2 p-[14px] text-sm shadow-sm flex flex-col gap-2 '>
               <div className='flex justify-between'>
-                <h1 className='text-[#1f1f1f] text-sm font-medium'>About Sid</h1>
+                <h1 className='text-[#1f1f1f] text-sm font-medium'>About {myProfileData.name}</h1>
                 <button className=' bg-[#F0EFFA]  rounded-[64.587px] px-4 py-1 text-xs font-normal'>Edit</button>
               </div>
-              <p className='font-normal'>Lorem ipsum dolor sit amet consectetur Erat auctor a aliquam vel congue luctus. Leo diam cras neque mauris ac arcu elit ipsum dolor sit amet consectetur</p>
+              <p className='font-normal'>{myProfileData.about}</p>
             </div>
 
 
@@ -68,8 +93,11 @@ export default function MyProfile() {
             <div className='rounded-[4.444px] border-2 p-[14px] text-sm shadow-sm flex flex-col gap-2 '>
               <h1 className='text-[#1f1f1f] text-sm font-medium'>Skills</h1>
               <div className='flex flex-col gap-4 font-medium '>
-                <p className=' font-normal'>Next Js</p>
-                <p className=' font-normal'>Typescript</p>
+                {
+                  myProfileData.skills.map((item) => {
+                    return <p className=' font-normal'>{item}</p>
+                  })
+                }
               </div>
             </div>
 
@@ -86,7 +114,7 @@ export default function MyProfile() {
             <div className='flex'>
               <div className='flex flex-col gap-4 font-medium '>
                 <h1 className='text-[#1f1f1f] text-sm font-medium'>Professional Details</h1>
-                <p className='text-xs font-normal'>This are the professional details shown to users in the app.</p>
+                <p className='text-xs font-normal'>{myProfileData.professionalDetails}</p>
               </div>
               <img src="/assets/Stars.svg" alt="" />
             </div>
@@ -100,15 +128,23 @@ export default function MyProfile() {
               <button className=' bg-[#F0EFFA]  rounded-[64.587px] px-4 py-1 text-xs font-normal'>Edit</button>
             </div>
 
-            <div className=' rounded-[26.667px] h-12 border-2  text-[10.667px] shadow-sm flex justify-around '>
-              <div className=' w-[30%] m-auto'>
-                <img src="/assets/Vector.svg" alt="" className='w-6 m-auto' />
-              </div>
-              <div className='flex flex-col  font-medium w-[70%] pr-[20%  ] '>
-                <h1 className='text-[#1f1f1f] text-sm font-medium m-auto'>Python</h1>
-                <p className='text-[10.667px] m-auto'>Coding Ninjas</p>
-              </div>
-            </div>
+
+
+            {
+              myProfileData.certifications.map((certfication) => {
+                return (
+                  <div className=' rounded-[26.667px] h-12 border-2  text-[10.667px] shadow-sm flex justify-around '>
+                    <div className=' w-[30%] m-auto'>
+                      <img src="/assets/Vector.svg" alt="" className='w-6 m-auto' />
+                    </div>
+                    <div className='flex flex-col  font-medium w-[70%] pr-[20%  ] '>
+                      <h1 className='text-[#1f1f1f] text-sm font-medium m-auto'>{certfication.name}</h1>
+                      <p className='text-[10.667px] m-auto'>{certfication.institute}</p>
+                    </div>
+                  </div>)
+              })
+            }
+
           </div>
 
           {/* COL2 CARD3 */}
@@ -117,20 +153,21 @@ export default function MyProfile() {
               <h1 className='text-[#1f1f1f] text-[11.399px] font-medium'>Experience</h1>
               <button className=' bg-[#F0EFFA]  rounded-[64.587px] px-4 py-1 text-xs font-normal'>Edit</button>
             </div>
-            <div className='flex justify-between gap-1 rounded-[8.946px]  border-2 p-[14px] text-sm shadow-sm '>
-              <div className='flex flex-col gap-1 font-medium '>
-                <h1 className='text-[#1f1f1f] text-3 font-medium'>7 Years  (2014-2021)                Full-time</h1>
-                <p className='text-xs  text-slate-500'>Oruphones        -- Full Stack Developer</p>
-              </div>
-              <img src="/assets/logo.svg" alt="" />
-            </div>
-            <div className='flex justify-between gap-1 rounded-[8.946px]  border-2 p-[14px] text-sm shadow-sm '>
-              <div className='flex flex-col gap-1 font-medium '>
-                <h1 className='text-[#1f1f1f] text-sm font-medium'>7 Years  (2014-2021)                Full-time</h1>
-                <p className='text-xs  text-slate-500'>Oruphones        -- Full Stack Developer</p>
-              </div>
-              <img src="/assets/logo.svg" alt="" />
-            </div>
+
+
+            {
+              myProfileData.expeiences.map((experience) => {
+                return (
+                  <div className='flex justify-between gap-1 rounded-[8.946px]  border-2 p-[14px] text-sm shadow-sm '>
+                    <div className='flex flex-col gap-1 font-medium '>
+                      <h1 className='text-[#1f1f1f] text-3 font-medium'>{experience.fromYearToYear}</h1>
+                      <p className='text-xs  text-slate-500'>{experience.organizationWithRole}</p>
+                    </div>
+                    <img src="/assets/logo.svg" alt="" />
+                  </div>
+                )
+              })
+            }
 
 
 
@@ -143,13 +180,13 @@ export default function MyProfile() {
 
               <div className='flex justify-between gap-1 rounded-[8.946px]  border-2 p-[14px] text-[10.667px] shadow-sm '>
                 <div className='flex flex-col gap-1 font-medium '>
-                  <h1 className='text-[#413B89] text-sm font-medium'>IIT HYDERABAD</h1>
+                  <h1 className='text-[#413B89] text-sm font-medium'>{myProfileData.higherEducation.institute}</h1>
 
                   <div className='flex justify-between '>
-                    <h1 className='text-[#1f1f1f] text-xs font-medium'>(2010-2914)</h1>
-                    <h1 className='text-[#1f1f1f] text-xs font-medium'>Btech</h1>
+                    <h1 className='text-[#1f1f1f] text-xs font-medium'>{myProfileData.higherEducation.fromYearToYear}</h1>
+                    <h1 className='text-[#1f1f1f] text-xs font-medium'>{myProfileData.higherEducation.course}</h1>
                   </div>
-                  <p className='text-xs  text-slate-500'>Lorem ipsum dolor sit amet consectetur. Erat auctor a aliquam vel congue luctus. Leo diam cras neque mauris ac arcu elit ipsum dolor sit amet consectetur.</p>
+                  <p className='text-xs  text-slate-500'>{myProfileData.higherEducation.aboutEducation}</p>
                 </div>
 
               </div>
