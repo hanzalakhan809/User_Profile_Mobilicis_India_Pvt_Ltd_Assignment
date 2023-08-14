@@ -1,14 +1,26 @@
 
+"use client"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
+import Authservice from '../services/authServices'
+import { usePathname } from "next/navigation"
 
 export default function Navbar() {
+
+  const router = useRouter();
+  const path = usePathname();
+  const [mobileMenu, setShowMobileMenu] = useState(false)
+
+
+
   return (
-    <nav className='w-full h-14 md:h-20 bg-[#FFF] flex justify-between p-4 border-b-2 mb-5 '>
+    <nav className={`w-full h-14 md:h-20 bg-[#FFF] flex justify-between p-4 border-b-2 mb-5 }`}  >
 
       {/* FOR MEDIUM DEVICES */}
       <div>
-        <div className="flex gap-3 md:hidden " >
+        <div className="flex gap-3 md:hidden   " onClick={() => setShowMobileMenu(!mobileMenu)}  >
           <img src='/assets/menu.svg' alt="" className='w-6 ' />
-          <img src="/assets/logo.svg" alt="" className="w-[59px] " />
+          <img src="/assets/logo.svg" alt="" className={`w-[59px] ${mobileMenu ? "hidden" : ""} `} />
         </div>
 
 
@@ -25,9 +37,25 @@ export default function Navbar() {
 
 
       {/* FOR MEDIUM DEVICES */}
-      <div className="md:hidden flex gap-3">
+      <div className={`md:hidden flex gap-3 ${mobileMenu ? "hidden" : ""}`}>
         <img src='/assets/Notification.svg' alt="" className='w-6 ' />
         <img src="/assets/profilePhoto.svg" alt="" className=" w-6 h-full  bg-contain" />
+      </div>
+
+      <div className={`md:hidden flex gap-3 ${mobileMenu ? "" : "hidden"} `}>
+        <span
+          className={`${path === '/myprofile' ? "border-b-2 " : ""}`}
+          onClick={() => { router.push('/myprofile') }}>
+          My Profile
+        </span>
+        <span
+          className={`${path === '/connections' ? "border-b-2 " : ""}`}
+          onClick={() => { router.push('/connections') }}>
+          My Connections
+        </span>
+        <span onClick={() => { Authservice.logoutUser(); router.push('/'); }}>
+          Logout
+        </span>
       </div>
 
 
@@ -50,7 +78,7 @@ export default function Navbar() {
 
         </div>
       </div>
-    </nav>
+    </nav >
 
   )
 }
