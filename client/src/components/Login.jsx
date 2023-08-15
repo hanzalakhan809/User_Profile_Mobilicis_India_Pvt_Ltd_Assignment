@@ -63,9 +63,9 @@ const Login = () => {
 
     return (
       <form className="bg-white rounded-2xl shadow-2xl flex flex-col w-full md:w-1/3 items-center max-w-4xl transition duration-1000 ease-out" onSubmit={handleSubmit(handleLogin)}>
-        <h2 className='p-3 text-3xl font-bold text-pink-400'>Mobilicis</h2>
+        <h2 className='p-3 text-3xl font-bold text-pink-400'>{"Mobilicis"}</h2>
         <div className="inline-block border-[1px] justify-center w-20 border-blue-400 border-solid"></div>
-        <h3 className='text-xl font-semibold text-blue-400 pt-2'>Log In!</h3>
+        <h3 className='text-xl font-semibold text-blue-400 pt-2'>{"Log In!"}</h3>
         <div className='flex space-x-2 m-4 items-center justify-center'>
           
         </div>
@@ -106,8 +106,8 @@ const Login = () => {
           </button>
         </div>
         <div className="inline-block border-[1px] justify-center w-20 border-blue-400 border-solid"></div>
-        <p className='text-blue-400 mt-4 text-sm'>Don't have an account?</p>
-        <p className='text-blue-400 mb-4 text-sm font-medium cursor-pointer' onClick={() => setIsLogin(false)}>Create a New Account?</p>
+        <p className='text-blue-400 mt-4 text-sm'>{"Don't have an account?"}</p>
+        <p className='text-blue-400 mb-4 text-sm font-medium cursor-pointer' onClick={() => setIsLogin(false)}>{"Create a New Account?"}</p>
       </form>
     )
   }
@@ -117,7 +117,7 @@ const Login = () => {
       <form className="bg-blue-400  rounded-2xl shadow-2xl  flex flex-col w-full  md:w-1/3 items-center max-w-4xl transition duration-1000 ease-in" onSubmit={handleSubmit(handleSignup)} >
         <h2 className='p-3 text-3xl font-bold text-white'>Mobilicis</h2>
         <div className="inline-block border-[1px] justify-center w-20 border-white border-solid"></div>
-        <h3 className='text-xl font-semibold text-white pt-2'>Create Account!</h3>
+        <h3 className='text-xl font-semibold text-white pt-2'>{"Create Account!"}</h3>
   
         {/* Inputs */}
         <div className='flex flex-col items-center justify-center mt-2'>
@@ -170,8 +170,8 @@ const Login = () => {
 
         </div>
         <div className="inline-block border-[1px] justify-center w-20 border-white border-solid"></div>
-        <p className='text-white mt-4 text-sm'>Already have an account?</p>
-        <p className='text-white mb-4 text-sm font-medium cursor-pointer' onClick={() => setIsLogin(true)}>Login to your Account?</p>
+        <p className='text-white mt-4 text-sm'>{"Already have an account?"}</p>
+        <p className='text-white mb-4 text-sm font-medium cursor-pointer' onClick={() => setIsLogin(true)}>{"Login to your Account?"}</p>
       </form>
     )
   }
@@ -180,8 +180,8 @@ const Login = () => {
     <div className="bg-gray-100 flex flex-col items-center justify-center min-h-screen md:py-2">
       <main className="flex items-center w-full px-2 md:px-20">
         <div className="hidden md:inline-flex flex-col flex-1 space-y-1">
-          <p className='text-6xl text-blue-500 font-bold'>Mobilicis</p>
-          <p className='font-medium text-lg leading-1 text-pink-400'>Global leader in Mobile Phone and Device Management solutions</p>
+          <p className='text-6xl text-blue-500 font-bold'>{"Mobilicis"}</p>
+          <p className='font-medium text-lg leading-1 text-pink-400'>{"Global leader in Mobile Phone and Device Management solutions"}</p>
         </div>
         {
           isLogin ? (
