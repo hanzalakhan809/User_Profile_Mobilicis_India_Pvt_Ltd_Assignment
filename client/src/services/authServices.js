@@ -37,8 +37,8 @@ class AuthService {
       .then(response => {
         if (response.data && response.data.token) {
           this.authenticated = true;
-          localStorage.setItem('userToken', response.data.token);
-          localStorage.setItem('mobilicisEmail', email);
+           typeof window !== "undefined" ? localStorage.setItem('userToken', response.data.token): undefined
+           typeof window !== "undefined" ? localStorage.setItem('mobilicisEmail', email):undefined
         }
         console.log(response.data.token);
         return response.data;
@@ -58,14 +58,14 @@ class AuthService {
 
   logoutUser() {
     this.authenticated = false;
-    localStorage.removeItem('userToken');
-    localStorage.removeItem('mobilicisEmail');
+    typeof window !== "undefined" ? localStorage.removeItem('userToken'):undefined
+    typeof window !== "undefined" ? localStorage.removeItem('mobilicisEmail'):undefined
    
   }
 
 
   async getMyProfileData() {
-    const token = await localStorage.getItem('userToken');
+    const token = await   typeof window !== "undefined" ? localStorage.getItem('userToken'):undefined
     console.log(token, "iam token")
 
     return axios.get(URLFORUSER + 'userProfile', {
@@ -84,7 +84,7 @@ class AuthService {
   }
 
   async updateUserProfile(updatedData) {
-    const token = localStorage.getItem('userToken');  
+    const token =  typeof window !== "undefined" ? localStorage.getItem('userToken'):undefined
 
     try {
       const response = await axios.put(URLFORUSER + "updateUserProfile", updatedData, {
@@ -102,7 +102,7 @@ class AuthService {
   }
 
   isAuthenticated() {
-    return localStorage.getItem('userToken') ? true : false;
+    return  typeof window !== "undefined" ? localStorage.getItem('userToken') ? true : false:undefined
   }
 
 
