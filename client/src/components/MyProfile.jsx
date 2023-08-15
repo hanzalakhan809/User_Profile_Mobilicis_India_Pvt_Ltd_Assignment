@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import AuthService from '../services/authServices'
 import { useRouter } from 'next/navigation'
 import Modal from './Modal';
@@ -14,8 +14,8 @@ export default function MyProfile() {
   }
 
   const dummyData = {
-    name: "Vishnu Swaroop",
-    email: "vishnu@oruphones.com",
+    name: "Hanzala Khan",
+    email: "han@gmail.com",
     phone: "+91 49652845732",
     about: "Lorem ipsum dolor sit amet consectetur Erat auctor a aliquam vel congue luctus. Leo diam cras neque mauris ac arcu elit ipsum dolor sit amet consectetur",
     skills: ["Next Js", "Typescript"],
@@ -90,7 +90,18 @@ export default function MyProfile() {
       }]
   }
 
+
   const [myProfileData, setMyProfileData] = useState(dummyData)
+  useEffect(() => {
+
+    AuthService.getMyProfileData().then((data) => {
+
+      setMyProfileData(data)
+    }
+
+    )
+  }, [])
+
 
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -140,29 +151,29 @@ export default function MyProfile() {
                   <p className='text-[#1f1f1f]'>Your Name</p>
                   <button className=' bg-[#F0EFFA]  rounded-[64.587px] px-4 py-1 text-xs font-normal' name="name" onClick={handleModal}>Edit</button>
                 </div>
-                <p className='font-medium '>{myProfileData.name}</p>
+                <p className='font-medium '>{myProfileData?.name}</p>
               </div>
               <div className='flex flex-col gap-2'>
                 <div className='flex justify-between'>
                   <p className='text-[#1f1f1f]'>Email</p>
                   <button className=' bg-[#F0EFFA]  rounded-[64.587px] px-4 py-1 text-xs font-normal' name="email" onClick={handleModal}>Edit</button></div>
-                <p className='font-medium '>{myProfileData.email}</p>
+                <p className='font-medium '>{myProfileData?.email}</p>
               </div>
               <div className='flex flex-col gap-2'>
                 <div className='flex justify-between'>
                   <p className='text-[#1f1f1f]'>Phone Number</p>
                   <button className=' bg-[#F0EFFA]  rounded-[64.587px] px-4 py-1 text-xs font-normal' name="phone" onClick={handleModal}>Edit</button></div>
-                <p className='font-medium '>{myProfileData.phone}</p>
+                <p className='font-medium '>{myProfileData?.phone}</p>
               </div>
             </div>
 
             {/* Card 2 Most Inner */}
             <div className='rounded-[4.444px] border-2 p-[14px] text-sm shadow-sm flex flex-col gap-2 '>
               <div className='flex justify-between'>
-                <h1 className='text-[#1f1f1f] text-sm font-medium'>About {myProfileData.name}</h1>
+                <h1 className='text-[#1f1f1f] text-sm font-medium'>About {myProfileData?.name}</h1>
                 <button className=' bg-[#F0EFFA]  rounded-[64.587px] px-4 py-1 text-xs font-normal' name="about" onClick={handleModal}>Edit</button>
               </div>
-              <p className='font-normal'>{myProfileData.about}</p>
+              <p className='font-normal'>{myProfileData?.about}</p>
             </div>
 
 
@@ -173,7 +184,7 @@ export default function MyProfile() {
                 <button className=' bg-[#F0EFFA]  rounded-[64.587px] px-4 py-1 text-xs font-normal' name="skills" onClick={handleModal}>Edit</button></div>
               <div className='flex flex-col gap-4 font-medium '>
                 {
-                  myProfileData.skills.map((item) => {
+                  myProfileData?.skills.map((item) => {
                     return <p className=' font-normal' key={item}>{item}</p>
                   })
                 }
@@ -196,7 +207,7 @@ export default function MyProfile() {
                   <h1 className='text-[#1f1f1f] text-sm font-medium'>Professional Details</h1>
                   <button className=' bg-[#F0EFFA]  rounded-[64.587px] px-4 py-1 text-xs font-normal' name="professionalDetails" onClick={handleModal}>Edit</button></div>
                 <div className='flex justify-between' >
-                  <p className='text-xs font-normal'>{myProfileData.professionalDetails}</p>
+                  <p className='text-xs font-normal'>{myProfileData?.professionalDetails}</p>
                   <img src="/assets/Stars.svg" alt="" />
                 </div>
               </div>
@@ -215,8 +226,8 @@ export default function MyProfile() {
                 <img src="/assets/Vector.svg" alt="" className='w-6 m-auto' />
               </div>
               <div className='flex flex-col  font-medium w-[70%] pr-[20%  ] '>
-                <h1 className='text-[#1f1f1f] text-sm font-medium m-auto'>{myProfileData.certification.certificationName}</h1>
-                <p className='text-[10.667px] m-auto'>{myProfileData.certification.certificationInstitute}</p>
+                <h1 className='text-[#1f1f1f] text-sm font-medium m-auto'>{myProfileData?.certification?.certificationName}</h1>
+                <p className='text-[10.667px] m-auto'>{myProfileData?.certification?.certificationInstitute}</p>
               </div>
             </div>
 
@@ -231,12 +242,12 @@ export default function MyProfile() {
 
 
             {
-              myProfileData.experiences.map((experience, index) => {
+              myProfileData?.experiences.map((experience, index) => {
                 return (
                   <div className='flex justify-between gap-1 rounded-[8.946px]  border-2 p-[14px] text-sm shadow-sm ' key={index}>
                     <div className='flex flex-col gap-1 font-medium '>
-                      <h1 className='text-[#1f1f1f] text-3 font-medium'>{experience.fromYearToYear}</h1>
-                      <p className='text-xs  text-slate-500'>{experience.organizationWithRole}</p>
+                      <h1 className='text-[#1f1f1f] text-3 font-medium'>{experience?.fromYearToYear}</h1>
+                      <p className='text-xs  text-slate-500'>{experience?.organizationWithRole}</p>
                     </div>
                     <img src="/assets/logo.svg" alt="" />
                   </div>
@@ -255,13 +266,13 @@ export default function MyProfile() {
 
               <div className='flex justify-between gap-1 rounded-[8.946px]  border-2 p-[14px] text-[10.667px] shadow-sm '>
                 <div className='flex flex-col gap-1 font-medium '>
-                  <h1 className='text-[#413B89] text-sm font-medium'>{myProfileData.higherEducation.higherEducationInstitute}</h1>
+                  <h1 className='text-[#413B89] text-sm font-medium'>{myProfileData?.higherEducation?.higherEducationInstitute}</h1>
 
                   <div className='flex justify-between '>
-                    <h1 className='text-[#1f1f1f] text-xs font-medium'>{myProfileData.higherEducation.fromYearToYear}</h1>
-                    <h1 className='text-[#1f1f1f] text-xs font-medium'>{myProfileData.higherEducation.course}</h1>
+                    <h1 className='text-[#1f1f1f] text-xs font-medium'>{myProfileData?.higherEducation?.fromYearToYear}</h1>
+                    <h1 className='text-[#1f1f1f] text-xs font-medium'>{myProfileData?.higherEducation?.course}</h1>
                   </div>
-                  <p className='text-xs  text-slate-500'>{myProfileData.higherEducation.aboutEducation}</p>
+                  <p className='text-xs  text-slate-500'>{myProfileData?.higherEducation?.aboutEducation}</p>
                 </div>
 
               </div>

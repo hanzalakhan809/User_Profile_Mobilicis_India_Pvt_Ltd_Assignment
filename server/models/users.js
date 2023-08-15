@@ -14,10 +14,11 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    // date: {
-    //     type: Date,
-    //     default: Date.now
-    // }
+    profile: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'UserProfile'
+    }
+
 }, { timestamps: true });
 
 module.exports = User = mongoose.model('user', UserSchema);

@@ -3,6 +3,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { Button, Modal, Form, Row, Col, Input } from 'antd';
+import Authservice from '../services/authServices'
+
 
 
 const App = (props) => {
@@ -12,6 +14,11 @@ const App = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(openModal);
   const [form] = Form.useForm();
 
+  useEffect(() => {
+    Authservice.updateUserProfile(myProfileData).then((response) => {
+      console.log(response);
+    })
+  }, [myProfileData])
 
 
   useEffect(() => {
@@ -34,7 +41,7 @@ const App = (props) => {
         Object.entries(values).filter(([key, value]) => value !== undefined)
       );
 
-      let higherEducation = { ...myProfileData.higherEducation, ...cleanedObj };
+      let higherEducation = { ...myProfileData?.higherEducation, ...cleanedObj };
       setMyProfileData({ ...myProfileData, higherEducation })
     }
 
@@ -45,7 +52,7 @@ const App = (props) => {
         Object.entries(values).filter(([key, value]) => value !== undefined)
       );
 
-      let certification = { ...myProfileData.certification, ...cleanedObj };
+      let certification = { ...myProfileData?.certification, ...cleanedObj };
       setMyProfileData({ ...myProfileData, certification })
     }
 
@@ -63,11 +70,11 @@ const App = (props) => {
       console.log({ ...myProfileData, ...values });
       setMyProfileData({ ...myProfileData, ...values });
     }
+
     setIsModalVisible(false)
 
-
-
   }
+
 
   const showModal = () => {
     form.resetFields();
@@ -80,10 +87,6 @@ const App = (props) => {
     setIsModalOpen(false);
     if (onClose) onClose();
   };
-
-  const capitalizeFirstLetter = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
 
 
 
@@ -137,7 +140,7 @@ const App = (props) => {
                   }
                 ]}
               >
-                <Input placeholder='Institute' name='higherEducationInstitute' defaultValue={myProfileData.higherEducation.higherEducationInstitute} />
+                <Input placeholder='Institute' name='higherEducationInstitute' defaultValue={myProfileData?.higherEducation?.higherEducationInstitute} />
               </Form.Item>
 
               <Form.Item
@@ -150,21 +153,21 @@ const App = (props) => {
                   }
                 ]}
               >
-                <Input placeholder='From Year To Year' name='fromYearToYear' defaultValue={myProfileData.higherEducation.fromYearToYear} />
+                <Input placeholder='From Year To Year' name='fromYearToYear' defaultValue={myProfileData?.higherEducation?.fromYearToYear} />
               </Form.Item>
 
               <Form.Item
                 label='Course'
                 name='course'
               >
-                <Input placeholder='Course' name='course' defaultValue={myProfileData.higherEducation.course} />
+                <Input placeholder='Course' name='course' defaultValue={myProfileData?.higherEducation?.course} />
               </Form.Item>
 
               <Form.Item
                 label='About Education'
                 name='aboutEducation'
               >
-                <Input.TextArea placeholder='About Education' name='aboutEducation' defaultValue={myProfileData.higherEducation.aboutEducation} />
+                <Input.TextArea placeholder='About Education' name='aboutEducation' defaultValue={myProfileData?.higherEducation?.aboutEducation} />
               </Form.Item>
 
               <Form.Item>
@@ -186,7 +189,7 @@ const App = (props) => {
                   }
                 ]}
               >
-                <Input placeholder='Certification Name' name='certificationName' defaultValue={myProfileData.certification.certificationName} />
+                <Input placeholder='Certification Name' name='certificationName' defaultValue={myProfileData?.certification?.certificationName} />
               </Form.Item>
 
               <Form.Item
@@ -199,7 +202,7 @@ const App = (props) => {
                   }
                 ]}
               >
-                <Input placeholder='Certification Institute' name='certificationInstitute' defaultValue={myProfileData.certification.certificationInstitute} />
+                <Input placeholder='Certification Institute' name='certificationInstitute' defaultValue={myProfileData?.certification?.certificationInstitute} />
               </Form.Item>
             </>
           }
@@ -207,7 +210,7 @@ const App = (props) => {
           {
             name === "experiences" &&
 
-            myProfileData.experiences.map((experience, index) => (
+            myProfileData?.experiences?.map((experience, index) => (
               <React.Fragment key={index}>
                 <Form.Item
                   label={`From Year To Year ${index + 1}`}

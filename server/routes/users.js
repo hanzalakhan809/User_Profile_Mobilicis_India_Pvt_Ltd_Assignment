@@ -1,10 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken'); // Importing the JWT library
+const jwt = require('jsonwebtoken'); 
 const User = require('../models/users');
+const UserProfile = require('../models/userProfile')
+const auth = require('../middleware/authMiddleware');
 
-// JWT secret key (should be stored in a safer manner, perhaps as an environment variable)
+
+// JWT secret key 
 const jwtSecret = process.env.JWTSECRET;
 
 
@@ -22,19 +25,41 @@ router.post('/signup', (req, res) => {
                 email: req.body.email,
             });
 
-            // Hash the password
+            // Hashing the password
             bcrypt.genSalt(10, (err, salt) => {
                 bcrypt.hash(req.body.password, salt, (err, hash) => {
                     if (err) throw err;
                     newUser.password = hash;
+                    
                     newUser.save()
-                           .then(user => res.json({user,message : "Signed in successfully"}))
+                           .then(user => {
+                               // Create a new UserProfile
+                               const newUserProfile = new UserProfile({
+                                   user: user._id,
+                                   name: req.body.name,
+                                   email: req.body.email
+                               });
+
+                               newUserProfile.save()
+                                   .then(profile => {
+                                       user.profile = profile._id;
+                                       user.save().then(() => {
+                                           res.json({user, message : "Signed up successfully"});
+                                       });
+                                   })
+                                   .catch(err => res.status(400).json('Error creating user profile: ' + err));
+                           })
                            .catch(err => res.status(400).json('Error: ' + err));
                 });
             });
         })
         .catch(err => res.status(500).json('Server Error: ' + err));
 });
+
+
+
+
+
 
 //ROUTE2: Login
 router.post('/login', (req, res) => {
@@ -44,7 +69,7 @@ router.post('/login', (req, res) => {
                 return res.status(400).json({ message: 'User does not exist' });
             }
 
-            // Compare password
+            // Comparing password
             bcrypt.compare(req.body.password, user.password)
                   .then(isMatch => {
                       if (!isMatch) {
@@ -53,12 +78,12 @@ router.post('/login', (req, res) => {
                       const payload = { id: user.id, name: user.name, email: user.email }; 
                       jwt.sign(payload, jwtSecret, { expiresIn: 3600 }, (err, token) => {
                           if (err) throw err;
-                          res.json({ message: 'Logged in successfully', token: "Bearer " + token });
+                          res.json({ message: 'Logged in successfully', token: token });
                       });
                   })
                   .catch(err => res.status(500).json('Error comparing passwords: ' + err));
         })
         .catch(err => res.status(500).json('Server Error: ' + err));
 });
-""
+
 module.exports = router;

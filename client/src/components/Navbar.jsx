@@ -42,18 +42,18 @@ export default function Navbar() {
         <img src="/assets/profilePhoto.svg" alt="" className=" w-6 h-full  bg-contain" />
       </div>
 
-      <div className={`md:hidden flex gap-3 ${mobileMenu ? "" : "hidden"} `}>
+      <div className={`md:hidden cursor-pointer flex gap-3 ${mobileMenu ? "" : "hidden"} `}>
         <span
-          className={`${path === '/myprofile' ? "border-b-2 " : ""}`}
+          className={`${path === '/myprofile' ? "border-b-2 cursor-pointer" : ""}`}
           onClick={() => { router.push('/myprofile') }}>
           My Profile
         </span>
         <span
-          className={`${path === '/connections' ? "border-b-2 " : ""}`}
+          className={`${path === '/connections' ? "border-b-2 cursor-pointer" : ""}`}
           onClick={() => { router.push('/connections') }}>
           My Connections
         </span>
-        <span onClick={() => { Authservice.logoutUser(); router.push('/'); }}>
+        <span className="cursor-pointer" onClick={() => { Authservice.logoutUser(); router.push('/'); }}>
           Logout
         </span>
       </div>

@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 import AuthService from '../services/authServices'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form';
-// import {Facebook,GitHub,Google} from '@mui/icons-material'
 
 const Login = () => {
 
@@ -68,15 +67,7 @@ const Login = () => {
         <div className="inline-block border-[1px] justify-center w-20 border-blue-400 border-solid"></div>
         <h3 className='text-xl font-semibold text-blue-400 pt-2'>Log In!</h3>
         <div className='flex space-x-2 m-4 items-center justify-center'>
-          <div className="socialIcon">
-            {/* <Facebook/> */}
-          </div>
-          <div className="socialIcon">
-            {/* <GitHub/> */}
-          </div>
-          <div className="socialIcon">
-            {/* <Google/>   */}
-          </div>
+          
         </div>
         {/* Inputs */}
         <div className='flex flex-col items-center justify-center'>
@@ -127,17 +118,7 @@ const Login = () => {
         <h2 className='p-3 text-3xl font-bold text-white'>Mobilicis</h2>
         <div className="inline-block border-[1px] justify-center w-20 border-white border-solid"></div>
         <h3 className='text-xl font-semibold text-white pt-2'>Create Account!</h3>
-        <div className='flex space-x-2 m-4 items-center justify-center'>
-          <div className="socialIcon border-white">
-            {/* <Facebook className="text-white"/> */}
-          </div>
-          <div className="socialIcon border-white">
-            {/* <GitHub className="text-white"/> */}
-          </div>
-          <div className="socialIcon border-white">
-            {/* <Google className="text-white"/>   */}
-          </div>
-        </div>
+  
         {/* Inputs */}
         <div className='flex flex-col items-center justify-center mt-2'>
 
@@ -155,7 +136,7 @@ const Login = () => {
 
 
             {/* Input2 */}
-            <input type='emaill' name='email' className='rounded-2xl px-2 py-1 w-4/5 md:w-full border-[1px] border-blue-400 m-1 focus:shadow-md focus:border-pink-400 focus:outline-none focus:ring-0  mx-auto' autocomplete="off" placeholder='Email'
+            <input type='emaill' name='email' className='rounded-2xl px-2 py-1 w-4/5 md:w-full border-[1px] border-blue-400 m-1 focus:shadow-md focus:border-pink-400 focus:outline-none focus:ring-0  mx-auto' autoComplete="off" placeholder='Email'
               {...register("email", {
                 required: "Email is required",
 

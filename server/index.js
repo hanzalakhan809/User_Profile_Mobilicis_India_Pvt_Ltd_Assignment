@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors= require('cors');
 require('dotenv').config();
 const usersRoutes = require('./routes/users');
+const userProfileRoutes = require('./routes/userProfile');
 
 //CONNECTION TO MONDODB ATLAS
 const URI = process.env.MONGO_URI;
@@ -33,11 +34,13 @@ app.listen(port, () => {
 
 
 
+
 // APIs
 
 app.use('/auth', usersRoutes); 
 
-app.use('/userprofile', usersRoutes); 
+app.use('/user', userProfileRoutes); 
+
 
 
 
