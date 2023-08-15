@@ -1,6 +1,7 @@
 import './globals.css'
 import { Outfit } from 'next/font/google'
 
+
 const OutfitFont = Outfit({
   subsets: ['latin']
 })
@@ -13,6 +14,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+    
       <body className={OutfitFont.className}>
         {children}
       </body>
