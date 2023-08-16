@@ -19,17 +19,12 @@ const app = express();
 
 // MIDDLEWARES
 
-app.use(cors({
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'x-auth-token'],
-    credentials: true
-}));
+app.use(cors());
 
 // app.options('*', cors());  // Enable preflight requests for all routes
 
 app.options('*', (req, res) => {
-    res.header('Access-Control-Allow-Origin', 'https://user-profile-mobilicis-india-pvt-ltd-assignment-wsiz.vercel.app');
+    res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, x-auth-token');
     res.sendStatus(200);
