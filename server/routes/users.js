@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken'); 
 const User = require('../models/users');
 const UserProfile = require('../models/userProfile')
-const auth = require('../middleware/authMiddleware');
+
 
 
 // JWT secret key 
