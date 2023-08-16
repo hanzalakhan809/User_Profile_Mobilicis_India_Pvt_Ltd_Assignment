@@ -20,7 +20,11 @@ mongoose.connect(URI, {
 const app = express();
 
 //MIDDLEWARES
-app.use(cors());
+app.use(cors({
+    origin: ["https://user-profile-mobilicis-india-pvt-ltd-assignment-wsiz.vercel.app"],
+    methods: ["POST","GET","PUT"],
+    credentials: true
+}));
 app.use(bodyParser.json());
 
 
