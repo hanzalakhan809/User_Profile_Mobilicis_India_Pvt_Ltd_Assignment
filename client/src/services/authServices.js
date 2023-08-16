@@ -4,9 +4,9 @@ import axios from 'axios';
 axios.defaults.withCredentials = true;
 
 
-const URLFORAUTH = 'https://user-profile-mobilicis-india-pvt-ltd-assignment-api.vercel.app/auth/';
-const URLFORUSER = 'https://user-profile-mobilicis-india-pvt-ltd-assignment-api.vercel.app/user/';
-
+const URLFORAUTH = 'https://vercel.com/hanzalakhan809/user-profile-mobilicis-india-pvt-ltd-assignment-api/auth/';
+const URLFORUSER = 'https://vercel.com/hanzalakhan809/user-profile-mobilicis-india-pvt-ltd-assignment-api/user/';
+https://vercel.com/hanzalakhan809/user-profile-mobilicis-india-pvt-ltd-assignment-api
 class AuthService {
   constructor() {
     this.authenticated = false;
@@ -48,7 +48,7 @@ class AuthService {
 
   
   async login(email, password) {
-    return axios.post(URLFORAUTH + 'login', { email, password })
+    return axios.post(URLFORAUTH + 'login',{ withCredentials: true }, { email, password })
       .then(async response => {
         if (response.data && response.data.token) {
           this.authenticated = true;
