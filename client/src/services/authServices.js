@@ -4,8 +4,8 @@ import axios from 'axios';
 axios.defaults.withCredentials = true;
 
 
-const URLFORAUTH = 'https://vercel.com/hanzalakhan809/user-profile-mobilicis-india-pvt-ltd-assignment-api/auth/';
-const URLFORUSER = 'https://vercel.com/hanzalakhan809/user-profile-mobilicis-india-pvt-ltd-assignment-api/user/';
+const URLFORAUTH = '/auth/';
+const URLFORUSER = '/user/';
 https://vercel.com/hanzalakhan809/user-profile-mobilicis-india-pvt-ltd-assignment-api
 class AuthService {
   constructor() {
