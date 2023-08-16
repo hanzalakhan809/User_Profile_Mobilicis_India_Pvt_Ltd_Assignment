@@ -21,18 +21,30 @@ const app = express();
 
 //MIDDLEWARES
 
+const corsOptions = {
+    origin: 'https://user-profile-mobilicis-india-pvt-ltd-assignment-wsiz.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'x-auth-token'],
+    credentials: true,
+    optionsSuccessStatus: 200 // For legacy browser support
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));  // Enable preflight requests for all routes
+
+
 app.use((req, res, next) => {
     res.setHeader('Content-Type', 'text/html');
     res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
     next();
 });
 
-app.use(cors({
-    origin: ["https://user-profile-mobilicis-india-pvt-ltd-assignment-wsiz.vercel.app"],
-    methods: ["POST","GET","PUT"],
-    credentials: true
-}));
-app.use(bodyParser.json());
+// app.use(cors({
+//     origin: ["https://user-profile-mobilicis-india-pvt-ltd-assignment-wsiz.vercel.app"],
+//     methods: ["POST","GET","PUT"],
+//     credentials: true
+// }));
+// app.use(bodyParser.json());
 
 
 
