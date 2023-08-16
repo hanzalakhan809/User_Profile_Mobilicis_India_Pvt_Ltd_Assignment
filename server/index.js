@@ -19,16 +19,14 @@ const app = express();
 
 // MIDDLEWARES
 
-const corsOptions = {
-    origin: 'https://user-profile-mobilicis-india-pvt-ltd-assignment-wsiz.vercel.app',
+app.use(cors({
+    origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'x-auth-token'],
-    credentials: true,
-    optionsSuccessStatus: 200
-};
+    credentials: true
+}));
 
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));  // Enable preflight requests for all routes
+app.options('*', cors());  // Enable preflight requests for all routes
 
 app.use(bodyParser.json());
 
@@ -38,11 +36,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// Logging middleware for debugging
-app.use((req, res, next) => {
-    console.log(`Received ${req.method} request on ${req.path}`);
-    next();
-});
+
 
 // APIs
 app.use('/auth', usersRoutes); 
