@@ -5,13 +5,12 @@ This is  App Dashboard assignment given by blackcoffer
 Next Js,Tailwind Css,Ant Design,MongoDb Atlas,Node,Express.Json Web Token,Bcrypt Js etc.
 
 ## How To use deployed project
-1. Open Link-
+1. Open this Link- https://user-profile-mobilicis-india-pvt-ltd-assignment-wsiz-2z104zbe4.vercel.app/myprofile 
 2. Go To Login Page 
-3. Use demo account (advantage prefilled data to check UI accuracy),You can also Sign Up as a new user(no pre       filled data you have to add it manually)
+3. Use demo account (advantage prefilled data to check UI accuracy),You can also Sign Up as a new user(no prefilled data you have to add it manually)
    Email-  hanzala@gmail.com
    Password- 123
 4. Enjoy
-
 
 # How to run the code
 ## For Github user
