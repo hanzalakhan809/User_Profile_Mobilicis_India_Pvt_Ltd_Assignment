@@ -1,8 +1,8 @@
 "use client"
 import axios from 'axios';
 
-const URLFORAUTH = 'http://localhost:8080/auth/';
-const URLFORUSER = 'http://localhost:8080/user/';
+const URLFORAUTH = 'https://mobilicis-assignment-server.onrender.com/auth/';
+const URLFORUSER = 'https://mobilicis-assignment-server.onrender.com/user/';
 
 class AuthService {
   constructor() {
