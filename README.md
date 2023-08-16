@@ -25,3 +25,8 @@ Next Js,Tailwind Css,Ant Design,MongoDb Atlas,Node,Express.Json Web Token,Bcrypt
 8. run npm run dev to start devloment server on you local machine.
 9. Enjoy
 
+# Issues
+## Things need to be fixed  
+
+1. Upload photo feature not implemented using cloudinary (updated soon)
+2. By default there is dummy data uses as a intial state for myProfileData so if your internet slow down and you focely reload the page you can can se maybe dummy data for mliseconds.

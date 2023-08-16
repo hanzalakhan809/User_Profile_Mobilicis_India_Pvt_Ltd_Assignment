@@ -10,15 +10,19 @@ import Authservice from '../services/authServices'
 const App = (props) => {
 
 
-  const { name, openModal, onClose, myProfileData, setMyProfileData, setIsModalVisible } = props;
+  const { name, openModal, onClose, myProfileData, setMyProfileData, setIsModalVisible,setUpdateMyProfileData,updateMyprofileData } = props;
   const [isModalOpen, setIsModalOpen] = useState(openModal);
   const [form] = Form.useForm();
 
+ 
   useEffect(() => {
-    Authservice.updateUserProfile(myProfileData).then((response) => {
+    if (!updateMyprofileData) return;
+    setMyProfileData(updateMyprofileData);
+    Authservice.updateUserProfile(updateMyprofileData).then((response) => {
       console.log(response);
-    })
-  }, [myProfileData])
+    });
+
+  }, [updateMyprofileData]);
 
 
   useEffect(() => {
@@ -30,7 +34,7 @@ const App = (props) => {
 
     if (typeof values.skills == "string") {
       const skills = values.skills.split(',');
-      setMyProfileData({ ...myProfileData, skills: skills });
+      setUpdateMyProfileData({ ...myProfileData, skills: skills });
 
     }
 
@@ -42,7 +46,7 @@ const App = (props) => {
       );
 
       let higherEducation = { ...myProfileData?.higherEducation, ...cleanedObj };
-      setMyProfileData({ ...myProfileData, higherEducation })
+      setUpdateMyProfileData({ ...myProfileData, higherEducation })
     }
 
 
@@ -53,12 +57,12 @@ const App = (props) => {
       );
 
       let certification = { ...myProfileData?.certification, ...cleanedObj };
-      setMyProfileData({ ...myProfileData, certification })
+      setUpdateMyProfileData({ ...myProfileData, certification })
     }
 
 
     else if (values.experiences) {
-      setMyProfileData({ ...myProfileData, experiences: values.experiences });
+      setUpdateMyProfileData({ ...myProfileData, experiences: values.experiences });
     }
 
 
@@ -68,7 +72,7 @@ const App = (props) => {
       setIsModalOpen(false)
       // setOtherPatientDetails(values)
       console.log({ ...myProfileData, ...values });
-      setMyProfileData({ ...myProfileData, ...values });
+      setUpdateMyProfileData({ ...myProfileData, ...values });
     }
 
     setIsModalVisible(false)

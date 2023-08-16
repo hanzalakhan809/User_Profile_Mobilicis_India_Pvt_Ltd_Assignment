@@ -94,6 +94,7 @@ export default function MyConnections() {
 
 
   const [myProfileData, setMyProfileData] = useState(dummyData)
+  const [updateMyprofileData, setUpdateMyProfileData] = useState();
 
   useEffect(() => {
     AuthService.getMyProfileData().then((data) => {
@@ -103,15 +104,18 @@ export default function MyConnections() {
 
 
   useEffect(() => {
-    AuthService.updateUserProfile(myProfileData).then((response) => {
+    if (!updateMyprofileData) return;
+    setMyProfileData(updateMyprofileData);
+    AuthService.updateUserProfile(updateMyprofileData).then((response) => {
       console.log(response);
-    })
-  }, [myProfileData])
+    });
+
+  }, [updateMyprofileData]);
 
 
   const handleRemoveConnection = (myConnectionIndex) => {
     const afterRemovingConnection = myProfileData.myConnections.filter((connection, index) => index !== myConnectionIndex);
-    setMyProfileData({ ...myProfileData, myConnections: afterRemovingConnection })
+    setUpdateMyProfileData({ ...myProfileData, myConnections: afterRemovingConnection })
   }
 
 
@@ -126,7 +130,7 @@ export default function MyConnections() {
     const updatedMyConnections = [...myProfileData.myConnections, connectionToAdd];
 
     // Update state with the new added and Remove Connection
-    setMyProfileData(prevState => ({
+    setUpdateMyProfileData(prevState => ({
       ...prevState,
       suggestionConnectins: updatedSuggestionConnections,
       myConnections: updatedMyConnections

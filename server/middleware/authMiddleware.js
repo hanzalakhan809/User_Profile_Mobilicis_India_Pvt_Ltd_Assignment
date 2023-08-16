@@ -10,6 +10,7 @@ function auth(req, res, next) {
 
     try {
         const decoded = jwt.verify(token, jwtSecret);
+        console.log(decoded,"i am dexoded")
         req.user = decoded;
         next();
     } catch (err) {

@@ -10,6 +10,18 @@ class AuthService {
   }
 
 
+  static waitForWindow() {
+    return new Promise(resolve => {
+      const checkInterval = setInterval(() => {
+        if (typeof window !== 'undefined') {
+          clearInterval(checkInterval);
+          resolve();
+        }
+      }, 50);  // check every 50ms
+    });
+  }
+
+
   signup(name, email, password) {
     return axios.post(URLFORAUTH + 'signup', { name, email, password })
       .then(response => {
@@ -32,13 +44,14 @@ class AuthService {
 
 
   
-  login(email, password) {
+  async login(email, password) {
     return axios.post(URLFORAUTH + 'login', { email, password })
-      .then(response => {
+      .then(async response => {
         if (response.data && response.data.token) {
           this.authenticated = true;
-           typeof window !== "undefined" ? localStorage.setItem('userToken', response.data.token): undefined
-           typeof window !== "undefined" ? localStorage.setItem('mobilicisEmail', email):undefined
+          await AuthService.waitForWindow();
+            localStorage.setItem('userToken', response.data.token)
+            localStorage.setItem('mobilicisEmail', email)
         }
         console.log(response.data.token);
         return response.data;
@@ -56,16 +69,18 @@ class AuthService {
 
 
 
-  logoutUser() {
+  async logoutUser() {
     this.authenticated = false;
-    typeof window !== "undefined" ? localStorage.removeItem('userToken'):undefined
-    typeof window !== "undefined" ? localStorage.removeItem('mobilicisEmail'):undefined
+    await AuthService.waitForWindow();
+     localStorage.removeItem('userToken')
+     localStorage.removeItem('mobilicisEmail')
    
   }
 
 
   async getMyProfileData() {
-    const token = await   typeof window !== "undefined" ? localStorage.getItem('userToken'):undefined
+    await AuthService.waitForWindow();
+    const token = await    localStorage.getItem('userToken')
     console.log(token, "iam token")
 
     return axios.get(URLFORUSER + 'userProfile', {
@@ -84,7 +99,8 @@ class AuthService {
   }
 
   async updateUserProfile(updatedData) {
-    const token =  typeof window !== "undefined" ? localStorage.getItem('userToken'):undefined
+    await AuthService.waitForWindow();
+    const token =   localStorage.getItem('userToken')
 
     try {
       const response = await axios.put(URLFORUSER + "updateUserProfile", updatedData, {
@@ -101,8 +117,9 @@ class AuthService {
     }
   }
 
-  isAuthenticated() {
-    return  typeof window !== "undefined" ? localStorage.getItem('userToken') ? true : false:undefined
+ async isAuthenticated() {
+    await AuthService.waitForWindow();
+    return   localStorage.getItem('userToken') ? true : false
   }
 
 

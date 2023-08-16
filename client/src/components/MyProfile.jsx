@@ -92,6 +92,7 @@ export default function MyProfile() {
 
 
   const [myProfileData, setMyProfileData] = useState(dummyData)
+  const [updateMyprofileData, setUpdateMyProfileData] = useState();
   useEffect(() => {
 
     AuthService.getMyProfileData().then((data) => {
@@ -128,6 +129,8 @@ export default function MyProfile() {
         name={modalPassingInputName}
         myProfileData={myProfileData}
         setMyProfileData={setMyProfileData}
+        updateMyprofileData={updateMyprofileData}
+        setUpdateMyProfileData={setUpdateMyProfileData}
       />
 
       <div className='grid md:grid-cols-2 gap-5  m-[40px]  rounded-[7.125px] bg-[#FFF] border border-[#EBEBEE]   -mt-[30px] md:-mt-20 p-5 md:m-16 shadow-lg mb-10'>
