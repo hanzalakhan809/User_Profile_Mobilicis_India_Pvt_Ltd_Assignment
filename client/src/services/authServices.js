@@ -1,12 +1,9 @@
 "use client"
 import axios from 'axios';
 
-axios.defaults.withCredentials = true;
+const URLFORAUTH = 'http://localhost:8080/auth/';
+const URLFORUSER = 'http://localhost:8080/user/';
 
-
-const URLFORAUTH = '/auth/';
-const URLFORUSER = '/user/';
-https://vercel.com/hanzalakhan809/user-profile-mobilicis-india-pvt-ltd-assignment-api
 class AuthService {
   constructor() {
     this.authenticated = false;
@@ -48,7 +45,7 @@ class AuthService {
 
   
   async login(email, password) {
-    return axios.post(URLFORAUTH + 'login',{ withCredentials: true }, { email, password })
+    return axios.post(URLFORAUTH + 'login', { email, password })
       .then(async response => {
         if (response.data && response.data.token) {
           this.authenticated = true;
