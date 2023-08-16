@@ -1,8 +1,11 @@
 "use client"
 import axios from 'axios';
 
-const URLFORAUTH = 'http://localhost:8080/auth/';
-const URLFORUSER = 'http://localhost:8080/user/';
+axios.defaults.withCredentials = true;
+
+
+const URLFORAUTH = 'https://user-profile-mobilicis-india-pvt-ltd-assignment-api.vercel.app/auth/';
+const URLFORUSER = 'https://user-profile-mobilicis-india-pvt-ltd-assignment-api.vercel.app/user/';
 
 class AuthService {
   constructor() {
