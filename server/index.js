@@ -26,7 +26,15 @@ app.use(cors({
     credentials: true
 }));
 
-app.options('*', cors());  // Enable preflight requests for all routes
+// app.options('*', cors());  // Enable preflight requests for all routes
+
+app.options('*', (req, res) => {
+    res.header('Access-Control-Allow-Origin', 'https://user-profile-mobilicis-india-pvt-ltd-assignment-wsiz.vercel.app');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, x-auth-token');
+    res.sendStatus(200);
+  });
+
 
 app.use(bodyParser.json());
 
