@@ -16,9 +16,9 @@ Next Js,Tailwind Css,Ant Design,MongoDb Atlas,Node,Express.Json Web Token,Bcrypt
 4. Enjoy
 
 ## How project was deployed
-Frontend is is developed through Next Js and Backend with Express Js and Mongo Db Atlat.
-Front is deployed through Vercel and Backend is deploy throught Render.
-Into root directory there is Two folder one name client(frontend) second server(backend).
+Front-end is is developed through Next Js and Backend with Express Js and Mongo Db Atlas.
+Front-end is deployed through Vercel and Backend is deploy throught Render.
+In root directory there are two folders one named client(frontend) second named server(backend).
 Both are sync through my github account to push updates just push changes to github repo.
 
 # How to run the code
@@ -38,3 +38,4 @@ Both are sync through my github account to push updates just push changes to git
 
 1. Upload photo feature not implemented using cloudinary (updated soon)
 2. By default there is dummy data uses as a intial state for myProfileData so if your internet slow down and you focely reload the page you can can se maybe dummy data for mliseconds.
+3. In login/signup uncontrolled form is used through use form hook for error handling so there is minor bug on focusing on input field. It can be fixed through Controller provided by use form hook or convert it into controlled form.
