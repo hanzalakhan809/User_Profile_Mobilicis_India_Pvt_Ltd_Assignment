@@ -1,5 +1,5 @@
 # Assignment-Mobilicis India Private Limited
-This is  App Dashboard assignment given by blackcoffer
+This is Web App Dashboard with two main section My profile and My connection with login/signup and Authentication service this assignment given by Mobilicis India Private Limited
 
 ## Technology Used
 Next Js,Tailwind Css,Ant Design,MongoDb Atlas,Node,Express.Json Web Token,Bcrypt Js etc.
